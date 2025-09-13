@@ -1,0 +1,72 @@
+Github Actions Yaml:
+
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirement.txt ]; then pip install -r requirement.txt; fi
+
+      - name: Run tests
+        run: python -m pytest -q
+
+
+
+'''
+
+Ansible Hands On:
+
+- name: My First Playbook
+  hosts: local
+  tasks:
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+    - name: Ensure nginx is running
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+    - name: Create welcome page
+      copy:
+        content: "Hello from Ansible on Windows WSL2!\n"
+        dest: /var/www/html/index.html
+- name: My First Playbook
+  hosts: local
+  tasks:
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+    - name: Ensure nginx is running
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+    - name: Create welcome page
+      copy:
+        content: "Hello from Ansible on Windows WSL2!\n"
+        dest: /var/www/html/index.html
+
+'''
